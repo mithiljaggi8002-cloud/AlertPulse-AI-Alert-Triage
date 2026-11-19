@@ -1,0 +1,41 @@
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Next.js
+.next/
+out/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Generated Prisma client
+apps/api/generated/prisma/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+# AI coding agent resources
+**/.agents/
+**/.claude/
+**/.windsurf/
+**/skills-lock.json
+
+# Nested workspace lockfiles
+/apps/*/pnpm-lock.yaml
+
+# Web agent instructions
+/apps/web/AGENTS.md

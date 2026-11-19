@@ -1,0 +1,12 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/generated/prisma
+# AI coding agent resources
+**/.agents/
+**/.claude/
+**/.windsurf/
+**/skills-lock.json
+# Ignore nested workspace lockfiles
+/apps/*/pnpm-lock.yaml

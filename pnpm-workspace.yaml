@@ -1,0 +1,11 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+allowBuilds:
+  '@prisma/engines': true
+  esbuild: true
+  prisma: false
+  protobufjs: true
+  sharp: false
+  unrs-resolver: false

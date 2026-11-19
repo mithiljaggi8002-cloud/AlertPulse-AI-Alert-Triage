@@ -1,0 +1,19 @@
+{
+  "name": "hackathon-project",
+  "version": "1.0.0",
+  "description": "AlertPulse - The Pager That Cried Wolf",
+  "main": "index.js",
+  "scripts": {
+    "build:api": "pnpm --filter api run build",
+    "build:web": "pnpm --filter web run build",
+    "start:api": "pnpm --filter api run start",
+    "start:web": "pnpm --filter web run start",
+    "prisma:generate": "pnpm --filter api run prisma:generate",
+    "prisma:migrate": "pnpm --filter api run prisma:migrate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

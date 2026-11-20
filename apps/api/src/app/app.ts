@@ -17,24 +17,37 @@ app.use(
 );
 
 // Allowed origins
-const allowedOrigins = [
+const configuredOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+      .map((o) => o.trim().replace(/\/+$/, ""))
+      .filter(Boolean)
+  : [];
+
+const allowedOrigins = new Set([
   "http://localhost:3000",
   "http://127.0.0.1:3000",
-  process.env.CORS_ORIGIN,
-].filter(Boolean) as string[];
+  ...configuredOrigins,
+]);
 
 // Enable cross-origin requests
 app.use(
   cors({
     origin: (origin, callback) => {
+      // Allow non-browser requests (e.g. server-to-server, health probes, curl)
       if (!origin) return callback(null, true);
+
+      const normalizedOrigin = origin.replace(/\/+$/, "");
+
+      // Allow configured origins or local development origins
       if (
-        allowedOrigins.includes(origin) ||
-        /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+        allowedOrigins.has(normalizedOrigin) ||
+        /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalizedOrigin)
       ) {
         return callback(null, true);
       }
-      return callback(null, true);
+
+      // Reject all other unconfigured origins
+      return callback(null, false);
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -46,12 +59,12 @@ app.use(
 app.use(express.json());
 
 app.get("/health", (_req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "API is healthy",
-        timestamp: new Date().toISOString(),
-        gemini: getGeminiDiagnostics(),
-    });
+  res.status(200).json({
+    success: true,
+    message: "API is healthy",
+    timestamp: new Date().toISOString(),
+    gemini: getGeminiDiagnostics(),
+  });
 });
 
 // User routes

@@ -7,14 +7,26 @@ import type {
 } from "@/types/alert";
 import type { ServicesResponse, BackendHealthResponse } from "@/types/service";
 
-function getApiBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, "");
+const PROD_API_URL = "https://alert-pulse-api.vercel.app";
+const DEV_API_URL = "http://localhost:5000";
+
+export function getApiBaseUrl(): string {
+  if (
+    process.env.NEXT_PUBLIC_API_URL &&
+    process.env.NEXT_PUBLIC_API_URL.trim().length > 0
+  ) {
+    return process.env.NEXT_PUBLIC_API_URL.trim().replace(/\/+$/, "");
+  }
+  if (process.env.NODE_ENV === "production") {
+    return PROD_API_URL;
   }
   if (typeof window !== "undefined" && window.location.hostname) {
-    return `http://${window.location.hostname}:5000`;
+    const host = window.location.hostname;
+    if (host !== "localhost" && host !== "127.0.0.1") {
+      return PROD_API_URL;
+    }
   }
-  return "http://localhost:5000";
+  return DEV_API_URL;
 }
 
 export async function fetchAlerts(params: {

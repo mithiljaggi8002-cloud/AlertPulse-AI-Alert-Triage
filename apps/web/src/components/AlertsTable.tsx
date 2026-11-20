@@ -19,6 +19,7 @@ import {
   formatDateTime,
   formatTimeOnly,
 } from "@/lib/utils";
+import { getApiBaseUrl } from "@/lib/api";
 
 interface AlertsTableProps {
   alerts: Alert[];
@@ -189,7 +190,7 @@ export function AlertsTable({
             </h3>
             <p className="mt-1 text-xs text-zinc-400 max-w-sm">{error}</p>
             <p className="mt-1 text-[11px] font-mono text-zinc-500">
-              Verify backend service is running on http://localhost:5000
+              Verify backend service is running and accessible at {getApiBaseUrl()}
             </p>
             <button
               type="button"

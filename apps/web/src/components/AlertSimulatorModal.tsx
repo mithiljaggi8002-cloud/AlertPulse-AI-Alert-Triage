@@ -19,7 +19,7 @@ import {
   PlusCircle,
   Repeat,
 } from "lucide-react";
-import { ingestAlert } from "@/lib/api";
+import { ingestAlert, getApiBaseUrl } from "@/lib/api";
 import type { IngestAlertPayload, IngestAlertResponse } from "@/types/alert";
 
 interface AlertSimulatorModalProps {
@@ -455,7 +455,7 @@ export function AlertSimulatorModal({
                   Payload Preview (POST /api/alerts)
                 </span>
                 <span className="text-[10px] font-mono text-zinc-500">
-                  Target: http://localhost:5000/api/alerts
+                  Target: {getApiBaseUrl()}/api/alerts
                 </span>
               </div>
 

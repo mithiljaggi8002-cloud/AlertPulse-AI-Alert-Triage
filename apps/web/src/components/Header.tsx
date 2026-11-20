@@ -40,7 +40,7 @@ export function Header({
         </div>
         <div className="hidden md:flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#161a23] border border-[#232936] text-[11px] font-mono text-zinc-400">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          <span>Ingestion Live (Port 5000)</span>
+          <span>Ingestion Pipeline Live</span>
         </div>
       </div>
 

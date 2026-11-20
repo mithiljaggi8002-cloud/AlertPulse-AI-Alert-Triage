@@ -18,7 +18,7 @@ import {
   RotateCcw,
   Info,
 } from "lucide-react";
-import { checkBackendHealth } from "@/lib/api";
+import { checkBackendHealth, getApiBaseUrl } from "@/lib/api";
 import type { BackendHealthResponse, UserPreferences } from "@/types/service";
 
 interface SettingsViewProps {
@@ -167,6 +167,12 @@ export function SettingsView({
 
             <div className="space-y-1 text-xs font-mono">
               <div className="flex justify-between text-zinc-400">
+                <span>API Host:</span>
+                <span className="text-zinc-200 truncate max-w-[200px]" title={getApiBaseUrl()}>
+                  {getApiBaseUrl()}
+                </span>
+              </div>
+              <div className="flex justify-between text-zinc-400">
                 <span>Endpoint:</span>
                 <span className="text-zinc-200">GET /health</span>
               </div>
@@ -187,8 +193,8 @@ export function SettingsView({
             </div>
 
             {healthError && (
-              <div className="p-2.5 rounded bg-red-950/30 border border-red-900/60 text-red-300 text-[11px] font-mono">
-                {healthError}
+              <div className="p-2.5 rounded bg-red-950/30 border border-red-900/60 text-red-300 text-[11px] font-mono break-all">
+                {healthError} (Target: {getApiBaseUrl()})
               </div>
             )}
           </div>

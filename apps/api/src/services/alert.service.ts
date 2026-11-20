@@ -57,7 +57,15 @@ export function classifyAlertSeverity(input: {
   value?: number | null;
 }): SeverityClassification {
   const lowerMessage = input.message.toLowerCase();
-  const val = input.value;
+  let val = input.value;
+
+  // Extract percentage from message if value is not provided
+  if (typeof val !== "number") {
+    const match = lowerMessage.match(/(\d+)%/);
+    if (match) {
+      val = parseInt(match[1], 10);
+    }
+  }
 
   // 1. Critical indicators -> RED
   const criticalKeywords = [
@@ -67,6 +75,7 @@ export function classifyAlertSeverity(input: {
     "down",
     "panic",
     "crash",
+    "crashed",
     "deadlock",
     "emergency",
     "unreachable",
@@ -77,6 +86,14 @@ export function classifyAlertSeverity(input: {
     "segmentation fault",
     "data loss",
     "breach",
+    "unavailable",
+    "exhausted",
+    "bad gateway",
+    "http 500",
+    "lost quorum",
+    "writes are failing",
+    "100% capacity",
+    "stopped accepting",
   ];
 
   for (const kw of criticalKeywords) {
@@ -105,6 +122,15 @@ export function classifyAlertSeverity(input: {
     "normal",
     "cleared",
     "success",
+    "passed",
+    "completed",
+    "synchronized",
+    "heartbeat",
+    "valid for",
+    "restored",
+    "replenished",
+    "normalized",
+    "in sync",
   ];
 
   for (const kw of recoveryKeywords) {
@@ -133,6 +159,9 @@ export function classifyAlertSeverity(input: {
     "lag",
     "latency",
     "dropped",
+    "increased",
+    "delayed",
+    "unhealthy",
   ];
 
   for (const kw of warningKeywords) {

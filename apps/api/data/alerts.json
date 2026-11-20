@@ -1,52 +1,302 @@
 [
-  { "id": "ALT-001", "service": "payment-api", "message": "Payment API returning HTTP 500 errors on 78% of requests", "timestamp": "10:01:02" },
-  { "id": "ALT-002", "service": "database-primary", "message": "Primary database connection refused", "timestamp": "10:01:05" },
-  { "id": "ALT-003", "service": "auth-service", "message": "Authentication service unavailable", "timestamp": "10:01:07" },
-  { "id": "ALT-004", "service": "payment-api", "message": "Payment API error rate exceeded 75%", "timestamp": "10:01:10" },
-  { "id": "ALT-005", "service": "database-primary", "message": "Database connection pool exhausted", "timestamp": "10:01:12" },
-  { "id": "ALT-006", "service": "checkout-service", "message": "Checkout requests timing out after 30 seconds", "timestamp": "10:01:15" },
-  { "id": "ALT-007", "service": "api-gateway", "message": "Gateway returning 502 Bad Gateway for upstream requests", "timestamp": "10:01:18" },
-  { "id": "ALT-008", "service": "database-primary", "message": "Primary database health check failed 5 consecutive times", "timestamp": "10:01:20" },
-  { "id": "ALT-009", "service": "payment-api", "message": "Payment processing queue backlog exceeded 10,000 requests", "timestamp": "10:01:23" },
-  { "id": "ALT-010", "service": "auth-service", "message": "Authentication requests failing across all regions", "timestamp": "10:01:26" },
-  { "id": "ALT-011", "service": "inventory-service", "message": "Inventory database synchronization stopped", "timestamp": "10:01:29" },
-  { "id": "ALT-012", "service": "api-gateway", "message": "Upstream connection timeout rate reached 65%", "timestamp": "10:01:31" },
-  { "id": "ALT-013", "service": "database-primary", "message": "Database replication lag exceeded 120 seconds", "timestamp": "10:01:34" },
-  { "id": "ALT-014", "service": "checkout-service", "message": "Checkout service crashed after memory exhaustion", "timestamp": "10:01:37" },
-  { "id": "ALT-015", "service": "payment-api", "message": "Payment transactions failing due to database write errors", "timestamp": "10:01:40" },
-  { "id": "ALT-016", "service": "redis-cache", "message": "Redis cluster lost quorum and is unavailable", "timestamp": "10:01:43" },
-  { "id": "ALT-017", "service": "web-frontend", "message": "Frontend unable to load session data from backend", "timestamp": "10:01:46" },
-  { "id": "ALT-018", "service": "storage-cluster", "message": "Disk volume reached 100% capacity and writes are failing", "timestamp": "10:01:49" },
-  { "id": "ALT-019", "service": "message-broker", "message": "RabbitMQ message broker stopped accepting connections", "timestamp": "10:01:52" },
-  { "id": "ALT-020", "service": "order-service", "message": "Order creation failed for 91% of incoming requests", "timestamp": "10:01:55" },
-  { "id": "ALT-021", "service": "web-server-01", "message": "CPU usage sustained above 85% for 10 minutes", "timestamp": "10:02:00" },
-  { "id": "ALT-022", "service": "web-server-02", "message": "Memory usage reached 89%", "timestamp": "10:02:02" },
-  { "id": "ALT-023", "service": "database-replica", "message": "Database query latency increased to 2.4 seconds", "timestamp": "10:02:05" },
-  { "id": "ALT-024", "service": "api-gateway", "message": "Request latency p95 exceeded 1.8 seconds", "timestamp": "10:02:08" },
-  { "id": "ALT-025", "service": "redis-cache", "message": "Cache hit ratio dropped to 61%", "timestamp": "10:02:11" },
-  { "id": "ALT-026", "service": "storage-cluster", "message": "Disk usage reached 88% capacity", "timestamp": "10:02:14" },
-  { "id": "ALT-027", "service": "worker-node-03", "message": "Worker processing time increased by 40%", "timestamp": "10:02:17" },
-  { "id": "ALT-028", "service": "payment-api", "message": "Payment retry rate increased to 18%", "timestamp": "10:02:20" },
-  { "id": "ALT-029", "service": "message-broker", "message": "Queue depth increased to 7,500 messages", "timestamp": "10:02:23" },
-  { "id": "ALT-030", "service": "auth-service", "message": "Authentication response latency above 900ms", "timestamp": "10:02:26" },
-  { "id": "ALT-031", "service": "database-primary", "message": "Active database connections reached 92% of limit", "timestamp": "10:02:29" },
-  { "id": "ALT-032", "service": "kubernetes-node-04", "message": "Pod restart count increased to 8 within 15 minutes", "timestamp": "10:02:32" },
-  { "id": "ALT-033", "service": "cdn-service", "message": "Cache expiration causing elevated origin traffic", "timestamp": "10:02:35" },
-  { "id": "ALT-034", "service": "notification-service", "message": "Email delivery latency increased to 12 seconds", "timestamp": "10:02:38" },
-  { "id": "ALT-035", "service": "inventory-service", "message": "Inventory synchronization delayed by 4 minutes", "timestamp": "10:02:41" },
-  { "id": "ALT-036", "service": "web-server-02", "message": "CPU usage sustained above 90% for 8 minutes", "timestamp": "10:02:44" },
-  { "id": "ALT-037", "service": "database-replica", "message": "Replication lag increased to 35 seconds", "timestamp": "10:02:47" },
-  { "id": "ALT-038", "service": "load-balancer", "message": "One backend instance marked unhealthy", "timestamp": "10:02:50" },
-  { "id": "ALT-039", "service": "worker-node-03", "message": "Memory utilization reached 87%", "timestamp": "10:02:53" },
-  { "id": "ALT-040", "service": "api-gateway", "message": "Rate limiting triggered for 12% of incoming requests", "timestamp": "10:02:56" },
-  { "id": "ALT-041", "service": "backup-service", "message": "Daily database backup completed successfully", "timestamp": "10:03:00" },
-  { "id": "ALT-042", "service": "web-server-01", "message": "Health check passed", "timestamp": "10:03:03" },
-  { "id": "ALT-043", "service": "deployment-service", "message": "Deployment v2.4.1 completed successfully", "timestamp": "10:03:06" },
-  { "id": "ALT-044", "service": "monitoring-agent", "message": "Monitoring agent heartbeat received", "timestamp": "10:03:09" },
-  { "id": "ALT-045", "service": "database-replica", "message": "Database replication synchronized", "timestamp": "10:03:12" },
-  { "id": "ALT-046", "service": "redis-cache", "message": "Cache cleanup completed successfully", "timestamp": "10:03:15" },
-  { "id": "ALT-047", "service": "storage-cluster", "message": "Automated storage cleanup completed", "timestamp": "10:03:18" },
-  { "id": "ALT-048", "service": "ssl-monitor", "message": "SSL certificate check passed; valid for 142 days", "timestamp": "10:03:21" },
-  { "id": "ALT-049", "service": "worker-node-01", "message": "Scheduled maintenance completed", "timestamp": "10:03:24" },
-  { "id": "ALT-050", "service": "cron-service", "message": "Scheduled hourly task executed successfully", "timestamp": "10:03:27" }
+  {
+    "id": "ALT-001",
+    "service": "payment-api",
+    "message": "Payment API returning critical HTTP 500 errors on 78% of requests",
+    "timestamp": "10:01:02"
+  },
+  {
+    "id": "ALT-002",
+    "service": "database-primary",
+    "message": "Primary database connection refused",
+    "timestamp": "10:01:05"
+  },
+  {
+    "id": "ALT-003",
+    "service": "auth-service",
+    "message": "Authentication service unavailable across all nodes",
+    "timestamp": "10:01:07"
+  },
+  {
+    "id": "ALT-004",
+    "service": "payment-api",
+    "message": "Payment API critical error rate exceeded 75%",
+    "timestamp": "10:01:10"
+  },
+  {
+    "id": "ALT-005",
+    "service": "database-primary",
+    "message": "Primary database connection pool exhausted and rejecting queries",
+    "timestamp": "10:01:12"
+  },
+  {
+    "id": "ALT-006",
+    "service": "checkout-service",
+    "message": "Checkout service requests timing out; payment flow crashed",
+    "timestamp": "10:01:15"
+  },
+  {
+    "id": "ALT-007",
+    "service": "api-gateway",
+    "message": "API Gateway returning 502 Bad Gateway; upstream service down",
+    "timestamp": "10:01:18"
+  },
+  {
+    "id": "ALT-008",
+    "service": "database-primary",
+    "message": "Primary database health check failed 5 consecutive times; node unreachable",
+    "timestamp": "10:01:20"
+  },
+  {
+    "id": "ALT-009",
+    "service": "payment-api",
+    "message": "Payment processing queue backlog exceeded 10,000 requests; critical queue stall",
+    "timestamp": "10:01:23"
+  },
+  {
+    "id": "ALT-010",
+    "service": "auth-service",
+    "message": "Authentication requests failing across all regions; emergency failover required",
+    "timestamp": "10:01:26"
+  },
+  {
+    "id": "ALT-011",
+    "service": "inventory-service",
+    "message": "Inventory database synchronization stopped; fatal write error",
+    "timestamp": "10:01:29"
+  },
+  {
+    "id": "ALT-012",
+    "service": "api-gateway",
+    "message": "Upstream connection timeout rate reached 65%",
+    "timestamp": "10:01:31"
+  },
+  {
+    "id": "ALT-013",
+    "service": "database-primary",
+    "message": "Database replication lag exceeded 120 seconds",
+    "timestamp": "10:01:34"
+  },
+  {
+    "id": "ALT-014",
+    "service": "checkout-service",
+    "message": "Checkout service crashed after memory exhaustion",
+    "timestamp": "10:01:37"
+  },
+  {
+    "id": "ALT-015",
+    "service": "payment-api",
+    "message": "Payment transactions failing due to database write errors; critical outage",
+    "timestamp": "10:01:40"
+  },
+  {
+    "id": "ALT-016",
+    "service": "redis-cache",
+    "message": "Redis cluster lost quorum and is completely unavailable",
+    "timestamp": "10:01:43"
+  },
+  {
+    "id": "ALT-017",
+    "service": "web-frontend",
+    "message": "Frontend unable to load session data; auth service down",
+    "timestamp": "10:01:46"
+  },
+  {
+    "id": "ALT-018",
+    "service": "storage-cluster",
+    "message": "Disk volume reached 100% capacity and writes are failing; fatal I/O error",
+    "timestamp": "10:01:49"
+  },
+  {
+    "id": "ALT-019",
+    "service": "message-broker",
+    "message": "RabbitMQ message broker stopped accepting connections",
+    "timestamp": "10:01:52"
+  },
+  {
+    "id": "ALT-020",
+    "service": "order-service",
+    "message": "Order creation failed for 91% of incoming requests; critical threshold breached",
+    "timestamp": "10:01:55"
+  },
+  {
+    "id": "ALT-021",
+    "service": "web-server-01",
+    "message": "CPU usage sustained above 85% for 10 minutes",
+    "timestamp": "10:02:00"
+  },
+  {
+    "id": "ALT-022",
+    "service": "web-server-02",
+    "message": "Memory usage reached 89%",
+    "timestamp": "10:02:02"
+  },
+  {
+    "id": "ALT-023",
+    "service": "database-replica",
+    "message": "Database query latency increased to 2.4 seconds",
+    "timestamp": "10:02:05"
+  },
+  {
+    "id": "ALT-024",
+    "service": "api-gateway",
+    "message": "Request latency p95 exceeded 1.8 seconds",
+    "timestamp": "10:02:08"
+  },
+  {
+    "id": "ALT-025",
+    "service": "redis-cache",
+    "message": "Cache hit ratio dropped to 61%",
+    "timestamp": "10:02:11"
+  },
+  {
+    "id": "ALT-026",
+    "service": "storage-cluster",
+    "message": "Disk usage reached 88% capacity",
+    "timestamp": "10:02:14"
+  },
+  {
+    "id": "ALT-027",
+    "service": "worker-node-03",
+    "message": "Worker processing time increased by 40%",
+    "timestamp": "10:02:17"
+  },
+  {
+    "id": "ALT-028",
+    "service": "payment-api",
+    "message": "Payment retry rate increased to 18%",
+    "timestamp": "10:02:20"
+  },
+  {
+    "id": "ALT-029",
+    "service": "message-broker",
+    "message": "Queue depth increased to 7,500 messages",
+    "timestamp": "10:02:23"
+  },
+  {
+    "id": "ALT-030",
+    "service": "auth-service",
+    "message": "Authentication response latency above 900ms",
+    "timestamp": "10:02:26"
+  },
+  {
+    "id": "ALT-031",
+    "service": "database-primary",
+    "message": "Active database connections elevated to 88% of limit",
+    "timestamp": "10:02:29"
+  },
+  {
+    "id": "ALT-032",
+    "service": "kubernetes-node-04",
+    "message": "Pod restart count increased to 8 within 15 minutes",
+    "timestamp": "10:02:32"
+  },
+  {
+    "id": "ALT-033",
+    "service": "cdn-service",
+    "message": "Cache expiration causing elevated origin traffic",
+    "timestamp": "10:02:35"
+  },
+  {
+    "id": "ALT-034",
+    "service": "notification-service",
+    "message": "Email delivery latency increased to 12 seconds",
+    "timestamp": "10:02:38"
+  },
+  {
+    "id": "ALT-035",
+    "service": "inventory-service",
+    "message": "Inventory synchronization recovered and fully caught up",
+    "timestamp": "10:02:42"
+  },
+  {
+    "id": "ALT-036",
+    "service": "web-server-02",
+    "message": "CPU usage returned to normal operating range at 32%",
+    "timestamp": "10:02:45"
+  },
+  {
+    "id": "ALT-037",
+    "service": "database-replica",
+    "message": "Replication lag cleared; all replicas in sync",
+    "timestamp": "10:02:48"
+  },
+  {
+    "id": "ALT-038",
+    "service": "load-balancer",
+    "message": "All backend instances healthy; traffic rebalanced",
+    "timestamp": "10:02:51"
+  },
+  {
+    "id": "ALT-039",
+    "service": "worker-node-03",
+    "message": "Memory utilization normalized to 42%",
+    "timestamp": "10:02:54"
+  },
+  {
+    "id": "ALT-040",
+    "service": "api-gateway",
+    "message": "Error budget replenished; rate limits cleared",
+    "timestamp": "10:02:57"
+  },
+  {
+    "id": "ALT-041",
+    "service": "backup-service",
+    "message": "Daily database backup completed successfully",
+    "timestamp": "10:03:00"
+  },
+  {
+    "id": "ALT-042",
+    "service": "web-server-01",
+    "message": "Health check passed",
+    "timestamp": "10:03:03"
+  },
+  {
+    "id": "ALT-043",
+    "service": "deployment-service",
+    "message": "Deployment v2.4.1 completed successfully",
+    "timestamp": "10:03:06"
+  },
+  {
+    "id": "ALT-044",
+    "service": "monitoring-agent",
+    "message": "Monitoring agent heartbeat received",
+    "timestamp": "10:03:09"
+  },
+  {
+    "id": "ALT-045",
+    "service": "database-replica",
+    "message": "Database replication synchronized",
+    "timestamp": "10:03:12"
+  },
+  {
+    "id": "ALT-046",
+    "service": "redis-cache",
+    "message": "Cache cleanup completed successfully",
+    "timestamp": "10:03:15"
+  },
+  {
+    "id": "ALT-047",
+    "service": "storage-cluster",
+    "message": "Automated storage cleanup completed",
+    "timestamp": "10:03:18"
+  },
+  {
+    "id": "ALT-048",
+    "service": "ssl-monitor",
+    "message": "SSL certificate check passed; valid for 142 days",
+    "timestamp": "10:03:21"
+  },
+  {
+    "id": "ALT-049",
+    "service": "worker-node-01",
+    "message": "Scheduled maintenance completed",
+    "timestamp": "10:03:24"
+  },
+  {
+    "id": "ALT-050",
+    "service": "cron-service",
+    "message": "Scheduled hourly task executed successfully",
+    "timestamp": "10:03:27"
+  }
 ]

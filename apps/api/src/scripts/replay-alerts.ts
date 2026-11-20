@@ -40,11 +40,16 @@ async function main(): Promise<void> {
     "utf8",
   );
   const alerts = feedSchema.parse(JSON.parse(fileContents));
-  const orderedAlerts = shuffleAlerts(alerts);
-  const apiBaseUrl = (process.env.ALERT_API_URL || "http://localhost:5000").replace(/\/+$/, "");
-  const firstBatchSize = 10;
+  const rawApiUrls = process.env.ALERT_API_URL || "http://localhost:5000,https://alert-pulse-api.vercel.app";
+  const apiBaseUrls = rawApiUrls
+    .split(",")
+    .map((url) => url.trim().replace(/\/+$/, ""))
+    .filter(Boolean);
+
   const initialIntervalMs = Number(process.env.ALERT_INTERVAL_MS || 60_000);
-  const laterIntervalMs = Number(process.env.ALERT_SLOW_INTERVAL_MS || 5 * 60_000);
+  const laterIntervalMs = Number(process.env.ALERT_SLOW_INTERVAL_MS || initialIntervalMs);
+  const firstBatchSize = Number(process.env.ALERT_FIRST_BATCH_SIZE || 50);
+  const shouldLoop = process.env.ALERT_LOOP !== "false";
 
   if (
     !Number.isFinite(initialIntervalMs) ||
@@ -55,58 +60,59 @@ async function main(): Promise<void> {
     throw new Error("Alert feed intervals must be positive numbers");
   }
 
-  if (process.argv.includes("--dry-run")) {
-    console.log(
-      `Validated ${orderedAlerts.length} alerts. First ${firstBatchSize} are sent every ${initialIntervalMs}ms; the rest every ${laterIntervalMs}ms. Randomized send order:`,
-    );
-    orderedAlerts.forEach((alert, index) => {
-      console.log(`${index + 1}. ${alert.id} ${alert.service} (${alert.timestamp})`);
-    });
-    return;
-  }
-
   console.log(
-    `Sending ${orderedAlerts.length} alerts in random order to ${apiBaseUrl}; first ${firstBatchSize} every ${initialIntervalMs}ms, then every ${laterIntervalMs}ms.`,
+    `Starting alert replay feed: sending 50 alerts every ${initialIntervalMs}ms to ${apiBaseUrls.join(" and ")} (loop=${shouldLoop})`,
   );
 
-  for (const [index, alert] of orderedAlerts.entries()) {
-    const requestStartedAt = Date.now();
-    const response = await fetch(`${apiBaseUrl}/api/alerts`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        source: `json-feed:${alert.id}`,
-        service: alert.service,
-        message: alert.message,
-      }),
-    });
-    const result = (await response.json()) as IngestResponse;
+  do {
+    const orderedAlerts = shuffleAlerts(alerts);
 
-    if (!response.ok) {
-      throw new Error(
-        `Failed to send ${alert.id}: ${response.status} ${result.message || response.statusText}`,
+    for (const [index, alert] of orderedAlerts.entries()) {
+      const requestStartedAt = Date.now();
+
+      await Promise.allSettled(
+        apiBaseUrls.map(async (apiUrl) => {
+          try {
+            const response = await fetch(`${apiUrl}/api/alerts`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                source: `json-feed:${alert.id}`,
+                service: alert.service,
+                message: alert.message,
+              }),
+            });
+            const result = (await response.json()) as IngestResponse;
+
+            if (!response.ok) {
+              console.error(
+                `Failed to send ${alert.id} to ${apiUrl}: ${response.status} ${result.message || response.statusText}`,
+              );
+            } else {
+              console.log(
+                `[${index + 1}/${orderedAlerts.length}] ${alert.id} ${alert.service} (${alert.timestamp}) -> ${apiUrl}`,
+              );
+            }
+          } catch (err: any) {
+            console.error(`Network error sending ${alert.id} to ${apiUrl}:`, err?.message || err);
+          }
+        }),
       );
-    }
 
-    console.log(
-      `[${index + 1}/${orderedAlerts.length}] ${alert.id} ${alert.service} (${alert.timestamp}) sent.`,
-    );
-    if (result.aiAnalysis?.summary) {
-      console.log(`Gemini summary: ${result.aiAnalysis.summary}`);
-    } else {
-      console.warn(`Gemini summary unavailable for ${alert.id}; check API logs and key configuration.`);
-    }
-
-    if (index < orderedAlerts.length - 1) {
       const intervalMs = index + 1 < firstBatchSize ? initialIntervalMs : laterIntervalMs;
       const remainingInterval = intervalMs - (Date.now() - requestStartedAt);
       if (remainingInterval > 0) {
         await wait(remainingInterval);
       }
     }
-  }
 
-  console.log("Finished sending all 50 alerts.");
+    if (shouldLoop) {
+      console.log("Completed 50-alert cycle. Repeating cycle in 60s...");
+      await wait(initialIntervalMs);
+    }
+  } while (shouldLoop);
+
+  console.log("Finished sending alerts.");
 }
 
 main().catch((error: unknown) => {
